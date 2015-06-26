@@ -23,7 +23,8 @@
  KiiMessage_SCOPE_APP_ID   | sa        | X           | X<br>(Depends on "sendObjectScope") | -                                     | AppID of object scope.                               |
  KiiMessage_SCOPE_USER_ID  | su        | X           | X<br>(Depends on "sendObjectScope") | -                                     | UserID of object scope. Push message has this field only if the subscribed bucket is user scope.|
  KiiMessage_SCOPE_GROUP_ID | sg        | X           | X<br>(Depends on "sendObjectScope") | -                                     | GroupID of object scope. Push message has this field only if the subscribed bucket is group scope. |
- KiiMessage_SCOPE_TYPE     | st        | X           | X<br>(Depends on "sendObjectScope") | -                                     | Type of object scope.                                 | - APP<br> - APP_AND_USER<br> - APP_AND_GROUP
+ KiiMessage_SCOPE_THING_ID | sth        | X           | X<br>(Depends on "sendObjectScope") | -                                     | ThingID of object scope. Push message has this field only if the subscribed bucket is thing scope. |
+ KiiMessage_SCOPE_TYPE     | st        | X           | X<br>(Depends on "sendObjectScope") | -                                     | Type of object scope.                                 | - APP<br> - APP_AND_USER<br> - APP_AND_GROUP<br> - APP_AND_THING
  KiiMessage_BUCKET_ID      | bi        | X           | -                                   | -                                     | Bucket name of push subscribed.                      |
  KiiMessage_BUCKET_TYPE    | bt        | X           | -                                   | -                                     | Type of source bucket.                    | - rw<br> - sync
  KiiMessage_OBJECT_ID      | oi        | X           | -                                   | -                                     | ID of the object operated.                           |
@@ -64,7 +65,10 @@ typedef NS_ENUM(NSUInteger, KiiMessageField) {
     KiiMessage_OBJECT_ID,
     /** Timestamp of the modification of object in milliseconds.
      (Since January 1, 1970 00:00:00 UTC) */
-    KiiMessage_OBJECT_MODIFIED_AT
+    KiiMessage_OBJECT_MODIFIED_AT,
+    /** ThingID of object scope.
+     Push message has this field only if the subscribed bucket is thing scope. */
+    KiiMessage_SCOPE_THING_ID
 };
 
 @class KiiAPNSFields,KiiGCMFields,KiiMQTTFields;
@@ -97,7 +101,8 @@ KiiCloud specific fields are as follows:
  KiiMessage_SCOPE_APP_ID   | sa        | X           | X<br>(Depends on "sendObjectScope") | -                                     | AppID of object scope.                               |
  KiiMessage_SCOPE_USER_ID  | su        | X           | X<br>(Depends on "sendObjectScope") | -                                     | UserID of object scope. Push message has this field only if the subscribed bucket is user scope.|
  KiiMessage_SCOPE_GROUP_ID | sg        | X           | X<br>(Depends on "sendObjectScope") | -                                     | GroupID of object scope. Push message has this field only if the subscribed bucket is group scope. |
- KiiMessage_SCOPE_TYPE     | st        | X           | X<br>(Depends on "sendObjectScope") | -                                     | Type of object scope.                                 | - APP<br> - APP_AND_USER<br> - APP_AND_GROUP
+ KiiMessage_SCOPE_THING_ID | sth        | X           | X<br>(Depends on "sendObjectScope") | -                                     | ThingID of object scope. Push message has this field only if the subscribed bucket is thing scope. |
+ KiiMessage_SCOPE_TYPE     | st        | X           | X<br>(Depends on "sendObjectScope") | -                                     | Type of object scope.                                 | - APP<br> - APP_AND_USER<br> - APP_AND_GROUP<br> - APP_AND_THING
  KiiMessage_BUCKET_ID      | bi        | X           | -                                   | -                                     | Bucket name of push subscribed.                      |
  KiiMessage_BUCKET_TYPE    | bt        | X           | -                                   | -                                     | Type of bucket has been modified.                    | - rw<br> - sync
  KiiMessage_OBJECT_ID      | oi        | X           | -                                   | -                                     | ID of the object operated.                           |

@@ -61,6 +61,7 @@
 #import "KiiBaseObject.h"
 #import "KiiMQTTFields.h"
 #import "KiiEncryptedBucket.h"
+#import "KiiListResult.h"
 
 
 @class KiiFile, KiiUser, KiiBucket, KiiGroup;
@@ -240,5 +241,65 @@ typedef NS_ENUM(NSUInteger, KiiSite) {
 * @return A NSString object representing the URL of KiiApps Server.
 */
 + (NSString *)kiiAppsBaseURL;
+
+/**Returns the topics in this app scope. This is blocking method.
+ @param error On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You can not specify nil for this parameter or it will cause runtime error.
+ @return  a <KiiListResult> object representing list of topics in this app scope.
+ */
++ (KiiListResult*) listTopicsSynchronous:(NSError**) error;
+
+/**Returns the topics in this app scope. This is blocking method.
+ @param error On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You can not specify nil for this parameter or it will cause runtime error.
+ @param paginationKey pagination key. If nil or empty value is specified, this API regards no paginationKey specified.
+ @return  a <KiiListResult> object representing list of topics in this app scope.
+ */
++ (KiiListResult*) listTopicsSynchronous:(NSString*) paginationKey error:(NSError**) error;
+
+/**Returns the topics in this App scope asynchronously.
+
+ Receives a <KiiListResult> object representing list of topics. This is a non-blocking request.
+
+    [Kii listTopics:^(KiiListResult *topics, id callerObject, NSError *error){
+       //at this scope, callerObject will always be nil.
+       NSLog(@"%@",callerObject);
+       if(error == nil) {
+            NSLog(@"Got Results: %@", topics);
+            NSLog(@"Total topics: %@", topics.results.count);
+            NSLog(@"Has Next: %@ next paginationKey: %@", topics.hasNext?@"Yes":@"No", topics.paginationKey);
+            KiiTopic *firstTopic = topics.result.firstObject;
+            if (firstTopic){
+                NSLog(@"topic name :%@", firstTopic.name);
+            }
+       }
+    }];
+
+ @param completion The block to be called upon method completion, this is mandatory. See example.
+ @exception NSInvalidArgumentException if completion is nil.
+ */
++ (void) listTopics:(KiiListResultBlock) completion;
+
+/**Returns the topics in this app scope asynchronously.
+
+ Receives a <KiiListResult> object representing list of topics. This is a non-blocking request.
+
+    [Kii listTopics:paginationKey block:^(KiiListResult *topics, id callerObject, NSError *error){
+       //at this scope, callerObject will always be nil.
+       NSLog(@"%@",callerObject);
+       if(error == nil) {
+            NSLog(@"Got Results: %@", topics);
+            NSLog(@"Total topics: %@", topics.results.count);
+            NSLog(@"Has Next: %@ next paginationKey: %@", topics.hasNext?@"Yes":@"No", topics.paginationKey);
+            KiiTopic *firstTopic = topics.result.firstObject;
+            if (firstTopic){
+                NSLog(@"topic name :%@", firstTopic.name);
+            }
+       }
+    }];
+
+ @param paginationKey pagination key. If nil or empty value is specified, this API regards no paginationKey specified.
+ @param completion The block to be called upon method completion, this is mandatory. See example.
+ @exception NSInvalidArgumentException if completion is nil.
+ */
++ (void) listTopics:(NSString*) paginationKey block:(KiiListResultBlock) completion;
 
 @end

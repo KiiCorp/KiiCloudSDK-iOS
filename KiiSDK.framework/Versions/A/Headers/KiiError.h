@@ -16,10 +16,11 @@
  - *102* - The application was not found on the server. Please ensure your app id and key were entered correctly.
  - *103* - The required operation is failed due to unexpected error. Should not thrown if using latest SDK.
 
- <h3>Connectivity Errors (2xx)</h3>
+ <h3>Connectivity and Requests Errors (2xx)</h3>
  - *201* - Unable to connect to the internet
  - *202* - Unable to parse server response
  - *203* - Unable to authorize request
+ - *204* - Invalid input data, the given parameter and/or data is not valid.
  
  <h3>User API Errors (3xx)</h3>
  - *301* - Unable to retrieve valid access token
@@ -55,6 +56,7 @@
  - *331* - Valid stored user not found;
  - *332* - ACAccount authentication is not granted by user
  - *333* - ACAccount is not set by user
+ - *340* - User is not logged, this operations does not allow anonymous user.
  
  <h3>File API Errors (4xx)</h3>
  - *401* - Unable to delete file from cloud
@@ -284,6 +286,9 @@
 
 /* ACAccount is not set by user*/
 + (NSInteger) codeForACAccountNotSet;
+
+/* User is not logged, this operations does not allow anonymous user. */
++ (NSInteger) codeLoginRequired;
 
 #pragma mark - 400 codes (File API Errors)
 /* File API Errors (4xx) */
@@ -546,5 +551,8 @@
 
 /* No keychain item found */
 + (NSInteger) codeNonKeychainItemFound;
+
+/* Input data is invalid */
++ (NSInteger) codeInvalidRequestData;
 
 @end
