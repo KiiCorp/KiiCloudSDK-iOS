@@ -153,6 +153,9 @@
  - *1201* - >Unexpected Keychain errors.
  - *1202* - >Failed to unarchived object.
  - *1203* - >Failed to archived object.
+ - *1204* - >Keychian item not found.
+ - *1205* - >Not allowed to access keychain item.
+
  */
 @interface KiiError : NSError
 
@@ -551,6 +554,9 @@
 
 /* No keychain item found */
 + (NSInteger) codeNonKeychainItemFound;
+
+/* Accessing keychian item is not allowed */
++ (NSInteger) codeKeyChainAccessIsNotAllowed;
 
 /* Input data is invalid */
 + (NSInteger) codeInvalidRequestData;

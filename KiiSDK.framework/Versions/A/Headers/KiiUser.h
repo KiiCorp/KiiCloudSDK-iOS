@@ -480,16 +480,21 @@ typedef NS_ENUM(NSUInteger, KiiNotificationMethod) {
         }
     }];
  @note This method just restores the predefined fields locally. If you want to get custom fields, you need to access server by calling <[KiiUser refreshWithBlock:]>
+ @note Prior to v2.2.2, KiiSDK stored user credentials with kSecAttrAccessibleWhenUnlock,
+ so saving or loading user credentials would fail when device was unlocked. From v2.2.2,
+ KiiSDK stores user credentials with kSecAttrAccessibleAfterFirstUnlock, which means 
+ as long as your app restarts after user first unlock device, it is possible to 
+ authenticate with stored user credentials, even the device is lockd.
  @param block The block to be called upon method completion. See example
  */
 + (void) authenticateWithStoredCredentials:(KiiUserBlock)block;
 
-/**
- *  Synchronously authenticates a user with stored credentials from KeyChain.
- *
- *  @param error error On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You can not specify nil for this parameter or it will cause runtime error.
- *
- *  @return The KiiUser object that was authenticated. nil if failed to authenticate
+/** Synchronously authenticates a user with stored credentials from KeyChain.
+ 
+ Please confirm the details <[KiiUser authenticateWithStoredCredentials:]>
+
+ @param error error On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You can not specify nil for this parameter or it will cause runtime error.
+ @return The KiiUser object that was authenticated. nil if failed to authenticate
  */
 + (KiiUser *) authenticateWithStoredCredentialsSynchronous:(NSError **) error;
 
