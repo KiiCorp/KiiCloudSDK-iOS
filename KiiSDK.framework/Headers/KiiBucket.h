@@ -112,7 +112,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable NSArray* ) executeQuerySynchronous:(nullable KiiQuery*)query nextQuery:(KiiQuery*_Nullable*_Nullable)nextQuery error:(NSError*_Nullable*_Nullable)error;
 
-/** Deprecated. Use executeQuerySynchronous:nextQuery:error */
+/**
+ @deprecated Use <[KiiBucket executeQuerySynchronous:nextQuery:error:]>
+ */
 - (nullable NSArray* ) executeQuerySynchronous:(nullable KiiQuery*)query withError:(NSError*_Nullable*_Nullable)error andNext:(KiiQuery*_Nullable*_Nullable)nextQuery __attribute__((deprecated("Use executeQuerySynchronous:nextQuery:error:")));
 
 /** Execute a query on the current bucket
@@ -166,8 +168,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable NSNumber* ) countObjectsSynchronous:(nullable KiiQuery*) query error:(NSError*_Nullable*_Nullable) error;
 
-/** Deprecated. Use countObjectSynchronous:error: */
-- (NSUInteger) countSynchronousWithQuery:(nullable KiiQuery*) query andError:(NSError*_Nullable*_Nullable) error __attribute__((deprecated("Use countObjectSynchronous:error.")));
+/** @deprecated Use <[KiiBucket countObjectsSynchronous:error:]> */
+- (NSUInteger) countSynchronousWithQuery:(nullable KiiQuery*) query andError:(NSError*_Nullable*_Nullable) error __attribute__((deprecated("Use countObjectSynchronous:error:")));
 
 /**Asynchronously execute count aggregation of all clause query on current bucket.
  This is non-blocking method. 
@@ -258,6 +260,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) delete:(id)delegate withCallback:(SEL)callback;
 
 /** Get transfer manager object based on this bucket
+
 @return A transfer manager object based on this file bucket. 
  */
 -(KiiRTransferManager *) transferManager;
@@ -269,8 +272,8 @@ NS_ASSUME_NONNULL_BEGIN
     - Not null or empty
     - Matches ^[a-zA-Z0-9-_]{2,64}$
 
- * @param bucketName Name of the bucket.
- * @return YES if valid otherwise NO.
+ @param bucketName Name of the bucket.
+ @return YES if valid otherwise NO.
  */
 +(BOOL) isValidBucketName:(nullable NSString*) bucketName;
 NS_ASSUME_NONNULL_END

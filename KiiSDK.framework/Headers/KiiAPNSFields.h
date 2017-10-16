@@ -28,6 +28,12 @@
 /**String. Not required. encapsulation of launch-image key on APNS alert property*/
 @property(nonatomic,nullable) NSString* alertLaunchImage;	//String. Not required.
 
+/**String. Not required. encapsulation of title key on APNS alert property*/
+@property(nonatomic,nullable) NSString* alertTitle;	//String. Not required.
+
+/**String. Not required. encapsulation of subtitle key on APNS alert property*/
+@property(nonatomic,nullable) NSString* alertSubtitle;	//String. Not required.
+
 /**String. Not required. encapsulation of sound key on APNS  property*/
 @property(nonatomic,nullable) NSString* sound;
 
@@ -42,6 +48,11 @@
 /** String. Not required. Encapsulation of category key on APNS property.
  */
 @property(nonatomic,nullable) NSString* category;
+
+/** Number. Not required. encapsulation of mutable-content key on APNS property.
+ */
+@property(nonatomic,nullable) NSNumber* mutableContent;
+
 /** Define APNS specific metadata
  @param dict a Dictionary object contains one level json dictionary data
  */

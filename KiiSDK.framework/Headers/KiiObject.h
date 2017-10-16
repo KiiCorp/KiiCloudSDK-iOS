@@ -220,7 +220,7 @@ NS_ASSUME_NONNULL_BEGIN
  @note This API can not create new KiiObject on cloud when instantiated by <[KiiBucket createObjectWithID:]>, but can only update.
  If you want to create new KiiObject with it, please use <saveAllFieldsSynchronous:withError:>, <saveAllFields:withBlock:> or <saveAllFields:withDelegate:andCallback:> instead.
  */
-- (BOOL) saveSynchronous:(BOOL)forced withError:(NSError*_Nullable*_Nullable)error;
+- (BOOL) saveSynchronous:(BOOL)forced withError:(NSError*_Nullable*_Nullable)error NS_SWIFT_NAME(saveSynchronous(forced:));
 
 
 /** Asynchronously saves the latest object values to the server
@@ -431,7 +431,6 @@ NS_ASSUME_NONNULL_BEGIN
         }];
  
  @param block completion block.
- @param error An NSError object, set to nil to test for errors.
  @exception NSInvalidArgumentException will be thrown if completion block is nil.
  */
 - (void) publishBodyWithBlock:(KiiObjectPublishBodyBlock) block;
@@ -480,7 +479,6 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param expirationDate defined expiration date.
  @param block completion block. See code snippet above.
- @return the URL for the KiiObject body contents.
  @exception NSInvalidArgumentException will be thrown if completion block is nil.
  */
 - (void) publishBodyExpiresAt:(NSDate*) expirationDate withBlock:(KiiObjectPublishBodyBlock) block;
@@ -529,7 +527,7 @@ NS_ASSUME_NONNULL_BEGIN
         }];
  
  @param timeInterval NSUInteger time interval since now (in seconds).
- @param completion block.
+ @param block completion block.
  @exception NSInvalidArgumentException will be thrown if completion block is nil.
  */
 - (void) publishBodyExpiresIn:(NSUInteger) timeInterval withBlock:(KiiObjectPublishBodyBlock) block;
@@ -553,7 +551,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL) downloadBodySynchronousWithURL:(NSURL*) destinationFileURL andError:(NSError*_Nullable*_Nullable) error;
 
 /** Asynchronously download object body with progress and completion.
- 
  This is non blocking method. If destination file exist, it will be overwriten.
  
  If the object does not have id, an error (Error code : 501) will be returned.
@@ -569,7 +566,7 @@ NS_ASSUME_NONNULL_BEGIN
         {
             // do something during download progress
         }
-        andProgess:^(KiiObject *obj, NSUInteger completedSizeInBytes, NSUInteger totalSizeInBytes, NSError *error)
+        andProgress:^(KiiObject *obj, NSUInteger completedSizeInBytes, NSUInteger totalSizeInBytes, NSError *error)
         {
             // do something on completion
         }];
@@ -578,8 +575,11 @@ NS_ASSUME_NONNULL_BEGIN
  @param completion block for handling completion.
  @param progress block for handling progress.
  */
-- (void) downloadBodyWithURL:(NSURL*) destinationFileURL andCompletion:(nullable KiiObjectBodyCompletionBlock) completion andProgess:(nullable KiiObjectBodyProgressBlock) progess ;
-
+- (void) downloadBodyWithURL:(NSURL*) destinationFileURL andCompletion:(nullable KiiObjectBodyCompletionBlock) completion andProgress:(nullable KiiObjectBodyProgressBlock) progress;
+/**
+ @deprecated 
+*/
+- (void) downloadBodyWithURL:(NSURL*) destinationFileURL andCompletion:(nullable KiiObjectBodyCompletionBlock) completion andProgess:(nullable KiiObjectBodyProgressBlock) progess __attribute__ ((deprecated));
 /** Asynchronously download object body with completion.
  
  This is non blocking method. If destination file exist, it will be overwriten.
@@ -606,7 +606,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** Generate NSURLRequest instance for downloading object body.
  
  The generated request can be used to implement iOS 7 background transfer feature.
- 
+
  If the object does not have id, nil will be returned.
  
  If the object body does not exist, it fails on execution.
@@ -672,7 +672,7 @@ NS_ASSUME_NONNULL_BEGIN
             {
             // do something during download progress
             }
-    andProgess:^(KiiObject *obj, NSUInteger completedSizeInBytes, NSUInteger totalSizeInBytes, NSError *error)
+    andProgress:^(KiiObject *obj, NSUInteger completedSizeInBytes, NSUInteger totalSizeInBytes, NSError *error)
             {
             // do something on completion
         }];
@@ -680,11 +680,15 @@ NS_ASSUME_NONNULL_BEGIN
  @param sourceFileURL url for source file, it should have 'file://' scheme.
  @param contentType Content type of the object body. Please refer to http://www.iana.org/assignments/media-types/media-types.xhtml for the standard. If nil is passed, it will be set as "application/octet-stream".
  @param completion block for handling completion.
- @param contentType Content type of the object body. Please refer to http://www.iana.org/assignments/media-types/media-types.xhtml for the standard. If nil is passed, it will be parsed from URL's file extension.
  @param progress block for handling progress.
  @note After this operation, KiiObject version on cloud will be updated. If you want to use <saveSynchronous:withError:> or <saveAllFieldsSynchronous:withError:> with overwrite=NO argument, please do <refreshSynchronous:> before saving.
  */
-- (void) uploadBodyWithURL:(NSURL*) sourceFileURL andContentType: (nullable NSString*) contentType andCompletion:(nullable KiiObjectBodyCompletionBlock) completion andProgess:(nullable KiiObjectBodyProgressBlock) progess;
+- (void) uploadBodyWithURL:(NSURL*) sourceFileURL andContentType: (nullable NSString*) contentType andCompletion:(nullable KiiObjectBodyCompletionBlock) completion andProgress:(nullable KiiObjectBodyProgressBlock) progress;
+
+/** 
+@deprecated
+*/
+- (void) uploadBodyWithURL:(NSURL*) sourceFileURL andContentType: (nullable NSString*) contentType andCompletion:(nullable KiiObjectBodyCompletionBlock) completion andProgess:(nullable KiiObjectBodyProgressBlock) progess __attribute__ ((deprecated));
 
 /** Asynchronously upload object body with progress and completion.
  
@@ -699,7 +703,7 @@ NS_ASSUME_NONNULL_BEGIN
              {
              // do something during download progress
              }
-             andProgess:^(KiiObject *obj, NSUInteger completedSizeInBytes, NSUInteger totalSizeInBytes, NSError *error)
+             andProgress:^(KiiObject *obj, NSUInteger completedSizeInBytes, NSUInteger totalSizeInBytes, NSError *error)
              {
              // do something on completion
          }];
@@ -711,7 +715,12 @@ NS_ASSUME_NONNULL_BEGIN
  @exception NSInvalidArgumentException if data is nil.
  @note After this operation, KiiObject version on cloud will be updated. If you want to use <saveSynchronous:withError:> or <saveAllFieldsSynchronous:withError:> with overwrite=NO argument, please do <refreshSynchronous:> before saving.
  */
-- (void) uploadBodyWithData:(NSData*) data andContentType: (nullable NSString*) contentType andCompletion:(nullable KiiObjectBodyCompletionBlock) completion andProgess:(nullable KiiObjectBodyProgressBlock) progess;
+- (void) uploadBodyWithData:(NSData*) data andContentType: (nullable NSString*) contentType andCompletion:(nullable KiiObjectBodyCompletionBlock) completion andProgress:(nullable KiiObjectBodyProgressBlock) progress;
+
+/** 
+@deprecated
+*/
+- (void) uploadBodyWithData:(NSData*) data andContentType: (nullable NSString*) contentType andCompletion:(nullable KiiObjectBodyCompletionBlock) completion andProgess:(nullable KiiObjectBodyProgressBlock) progess __attribute__ ((deprecated));
 
 /** Asynchronously upload object body with completion.
  
