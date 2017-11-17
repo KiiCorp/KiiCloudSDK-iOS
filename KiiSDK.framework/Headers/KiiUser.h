@@ -16,7 +16,7 @@
 @class KiiPushSubscription;
 @class LocaleContainer;
 typedef void (^KiiUserBlock)(KiiUser *_Nullable user, NSError *_Nullable error);
-typedef void (^KiiUserArrayBlock)(KiiUser *_Nonnull user, NSArray *_Nullable , NSError *_Nullable error);
+typedef void (^KiiUserArrayBlock)(KiiUser *_Nonnull user, NSArray *_Nullable groups, NSError *_Nullable error);
 typedef void (^KiiErrorBlock)(NSError *_Nullable error);
 
 typedef NS_ENUM(NSUInteger, KiiNotificationMethod) {
@@ -128,7 +128,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  Example:
     
-        KiiSocialAccountInfo* facebookSocialInfo=[KiiUser currentUser].linkedSocialAccounts[@(kiiConnectorFacebook)];
+        KiiSocialAccountInfo* facebookSocialInfo = [KiiUser currentUser].linkedSocialAccounts[@(kiiConnectorFacebook)];
 
  @return A Dictionary of <KiiSocialAccountInfo> that is informations from the providers linked with this user.
  */
@@ -438,7 +438,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param accessToken A valid access token associated with the desired user.
  @param expiresAt NSDate representation of accessToken expiration obtained from <[KiiUser accessTokenDictionary]>.
  @param block The block to be called upon method completion. See example.
- @return The KiiUser object that was authenticated. nil if failed to authenticate.
  */
 + (void) authenticateWithToken:(NSString *)accessToken
                   andExpiresAt:(NSDate*) expiresAt
@@ -568,7 +567,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param refreshToken A valid refresh token for the user.
  @param expiresAt Access token expire time.
  @param block The block to be called upon method completion. See example.
- @return The KiiUser object that was authenticated. nil if failed to authenticate.
  */
 + (void) authenticateWithToken:(NSString *)accessToken
                      expiresAt:(NSDate*) expiresAt
@@ -590,8 +588,6 @@ NS_ASSUME_NONNULL_BEGIN
                                              expiresAt:(NSDate*)expiresAt
                                           refreshToken: (NSString *) refreshToken
                                                  error:(NSError*_Nullable*_Nullable)error;
-
-+ (nullable KiiUser *) authenticateWithStoredCredentialsSynchronous:(NSError *_Nullable*_Nullable) error;
 
 /** Asynchronously registers a user object with the server
 
@@ -702,7 +698,8 @@ NS_ASSUME_NONNULL_BEGIN
                        newPassword:(NSString*)newPassword
                              error:(NSError*_Nullable*_Nullable)error;
 
-/** Deprecated. Use updatePasswordSynchronous:newPassword:error: instead.*/
+/** @deprecated Use <[KiiUser updatePasswordSynchronous:newPassword:error:]> instead.
+ */
 - (BOOL) updatePasswordSynchronous:(NSError*_Nullable*_Nullable)error
                               from:(NSString*)fromPassword
                                 to:(NSString*)toPassword __attribute__((deprecated("Use updatePasswordSynchronous:newPassword:error: instead.")));
@@ -760,7 +757,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL) resetPasswordSynchronous:(NSString*)userIdentifier
                             error:(NSError*_Nullable*_Nullable)error;
 
-/** Deprecated. Use resetPasswordSynchronous:error instead.*/
+/** @deprecated Use <[KiiUser resetPasswordSynchronous:error:]> instead.*/
 + (BOOL) resetPasswordSynchronous:(NSError*_Nullable*_Nullable)error
                withUserIdentifier:(NSString*)userIdentifier __attribute__((deprecated("Use resetPasswordSynchronous:error:")));
 
@@ -886,7 +883,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL) verifyPhoneNumberSynchronous:(NSString*)code
                                         error:(NSError*_Nullable*_Nullable)error;
-/** Deprecated. Use verifyPhoneNumberSynchronous:error: */
+/** @deprecated Use <[KiiUser verifyPhoneNumberSynchronous:error:]> */
 - (BOOL) verifyPhoneNumber:(NSError*_Nullable*_Nullable)error
                   withCode:(NSString*)code __attribute__((deprecated("Use verifyPhoneNumberSynchronous:error:")));
 
@@ -1140,7 +1137,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param block The block to be called upon method completion. See example
  @deprecated This method is deprecated. Use <[KiiUser updateWithIdentityData:userFields:block:]> instead.
 */
-- (void) saveWithBlock:(KiiUserBlock)block;
+- (void) saveWithBlock:(KiiUserBlock)block __attribute__ ((deprecated("Use <[KiiUser updateWithIdentityData:userFields:block:]> instead")));
 
 /** Asynchronously saves the latest user values to the server
  
@@ -1162,7 +1159,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @deprecated This method is deprecated. Use <[KiiUser updateWithIdentityData:userFields:block:]> instead.
  */
-- (void) save:(id)delegate withCallback:(SEL)callback;
+- (void) save:(id)delegate withCallback:(SEL)callback __attribute__ ((deprecated("Use <[KiiUser updateWithIdentityData:userFields:block:]> instead.")));
 
 
 /** Synchronously saves the latest user values to the server
@@ -1172,7 +1169,7 @@ NS_ASSUME_NONNULL_BEGIN
  @deprecated This method is deprecated. Use <[KiiUser updateWithIdentityDataSynchronous:userFields:error:]> instead.
  @return YES if succeeded, NO otherwise.
  */
-- (BOOL) saveSynchronous:(NSError*_Nullable*_Nullable)error;
+- (BOOL) saveSynchronous:(NSError*_Nullable*_Nullable)error  __attribute__ ((deprecated("Use <[KiiUser updateWithIdentityDataSynchronous:userFields:error:]> instead")));
 
 
 /** Asynchronously update user attributes.
@@ -1362,7 +1359,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** Checks the if this user is linked with specified social provider.
  <KiiUser refreshSynchronous:> should be called before calling this API, otherwise it will always return NO.
  
- @param <KiiConnectorProvider> The provider to check
+ @param provider The provider to check
  @return YES if this user is linked with specified social provider, NO otherwise.
  */
 - (BOOL) isLinkedWithSocialProvider:(KiiConnectorProvider)provider;
@@ -1824,7 +1821,7 @@ NS_ASSUME_NONNULL_BEGIN
  Return the access tokens in a dictionary.
 
  Dictionary contains following key/values.
- <table border=4 width=250>
+ <table border='4' width='250'>
    <tr>
     <th>Key</th>
     <th>Type</th>
