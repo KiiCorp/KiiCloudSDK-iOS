@@ -161,7 +161,7 @@ NS_ASSUME_NONNULL_BEGIN
      }
 
  */
-+(void) unsubscribe:(id<KiiSubscribable>) subscribable withDelegate:(id) delegate andCallback:(SEL) callback;
++(void) unsubscribe:(id<KiiSubscribable>) subscribable withDelegate:(id) delegate andCallback:(SEL) callback __attribute__((deprecated("Use instance method instead.")));
 
 /** Synchronously unsubscribe a subscribable object.
  This is a blocking method.

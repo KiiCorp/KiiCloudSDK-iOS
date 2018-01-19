@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
+/**
+ * This enum represents server code environment version.
+ */
+typedef NS_ENUM(NSInteger,KiiServerCodeEnvironmentVersion){
+    kiiServerCodeEnvironmentNone NS_SWIFT_NAME(None) = -1 ,
+    kiiServerCodeEnvironmentV0 NS_SWIFT_NAME(V0) = 0,
+    kiiServerCodeEnvironmentV6 NS_SWIFT_NAME(V6) = 6
+};
 
 @class KiiServerCodeExecResult,KiiServerCodeEntryArgument,KiiServerCodeEntry;
 typedef void(^KiiServerCodeExecBlock) (KiiServerCodeEntry* _Nonnull entry,
@@ -45,6 +52,11 @@ typedef void(^KiiServerCodeExecBlock) (KiiServerCodeEntry* _Nonnull entry,
  */
 -(nonnull NSString*) entryName;
 
+/**
+* Get the version of Node.js to run.
+* @return environmentVersion
+*/
+-(KiiServerCodeEnvironmentVersion) environmentVersion;
 
 
 

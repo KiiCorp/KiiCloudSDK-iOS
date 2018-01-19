@@ -103,6 +103,7 @@
  - *602* - Query limit set too high
  - *603* - Query clauses is empty. Make sure "OR" and/or "AND" clauses have at least one correct sub-clauses
  - *604* - Query is not supported.
+ - *605* - End of the page, no more results.
  
  <h3>Push Notification Errors (7xx)</h3>
  - *701* - Push installation error. Installation already exist
@@ -421,6 +422,8 @@
 + (NSInteger) codeEmptyQueryClauses;
 
 + (NSInteger) codeQueryNotSupported;
+
++ (NSInteger) codeQueryEndOfPage;
 
 /* Push Notification Errors (7xx) */
 

@@ -9,6 +9,22 @@
 #import <Foundation/Foundation.h>
 #import "KiiGeoPoint.h"
 
+/**
+ * This enum represents supported field type for hasFieldClause
+ * This is used for <[KiiClause hasField:andType:]>.
+ */
+typedef NS_ENUM(NSUInteger, KiiFieldType) {
+
+    /** String Field Type*/
+    KiiFieldTypeString NS_SWIFT_NAME(String),
+    /** Integer Field Type*/
+    KiiFieldTypeInteger NS_SWIFT_NAME(Integer),
+    /** Decimal Field Type*/
+    KiiFieldTypeDecimal NS_SWIFT_NAME(Decimal),
+    /** Boolean Field Type*/
+    KiiFieldTypeBoolean NS_SWIFT_NAME(Boolean),
+};
+
 @class KiiGeoPoint;
 /**
  Build a query using one or more KiiClause methods
@@ -16,10 +32,10 @@
 @interface KiiClause : NSObject 
 NS_ASSUME_NONNULL_BEGIN
 
-/** Deprecated. Use andClauses: instead */
+/** @deprecated Use <[KiiClause andClauses:]> instead */
 + (KiiClause*) and:(KiiClause*)clause, ... __attribute__((deprecated("Use [KiiClause andClauses:] instead.")));
 
-/** Deprecated. Use orClauses: instead. */
+/** @deprecated Use <[KiiClause orClauses:]> instead. */
 + (KiiClause*) or:(KiiClause*)clause, ... __attribute__((deprecated("Use [KiiClause orClauses:] instead.")));
 
 
@@ -79,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Create a KiiClause with the OR operator concatenating multiple KiiClause objects
  @param clauses An array KiiClause objects to concatenate
- 
+ @note Query performance will be worse as the number of objects in bucket increases, so we recommend you avoid the OR clause if possible.
  @return KiiClause instance with concatenated OR operator,or nil if array contains any non KiiClause instance
  */
 +(nullable KiiClause*) orClauses:(NSArray*) clauses;
@@ -128,6 +144,21 @@ NS_ASSUME_NONNULL_BEGIN
   @return KiiClause instance.
  */
 +(KiiClause*) geoDistance:(NSString*)key center:(KiiGeoPoint*)center radius:(double)radius putDistanceInto:(nullable NSString*) calculatedDistance;
+
+/** Create an expression to returns all entities that have a specified field and type.
+ @param key name of the specified field.
+ @param fieldType The type of the content of the field.
+
+ @return KiiClause instance that construct hasField query.
+ */
++(KiiClause*) hasField:(NSString*)key andType:(KiiFieldType) fieldType;
+
+/** Create a KiiClause with the NOT operator concatenating multiple KiiClause objects
+ @param clause to be concatenated with NOT operator.
+ @note Query performance will be worse as the number of objects in bucket increases, so we recommend you avoid the NOT clause if possible.
+ @return KiiClause instance with concatenated NO operator
+ */
++(KiiClause*) notClause:(KiiClause*) clause;
 @end
 NS_ASSUME_NONNULL_END
 
