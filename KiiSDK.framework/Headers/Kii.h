@@ -62,6 +62,9 @@
 #import "KiiAnalytics.h"
 #import "KiiUserBuilder.h"
 #import "LocaleContainer.h"
+#import "KiiReceivedMessage.h"
+#import "KiiThingQuery.h"
+#import "KiiThingQueryResult.h"
 
 
 @class KiiUser, KiiBucket, KiiGroup;
@@ -228,6 +231,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 +(KiiServerCodeEntry*)serverCodeEntry:(NSString*) entryName withVersion:(NSString*) version;
 
+/** Create KiiServerCodeEntry instance with the given entry name, version name and Node.js environment version.
+ @param entryName a specific entry name for this server code. Can not be nil and valid entryName pattern is "[a-zA-Z][_a-zA-Z0-9]*$" .
+ @param version a string that represent version of the server code, must not nil or empty.
+ @param environmentVersion the version of Node.js to run.
+ @return KiiServerCodeEntry instance.
+ @exception NSInvalidArgumentException Thrown if given entryName is not valid or version is nil/empty.
+ @exception NSInvalidArgumentException Thrown if given version is nil or empty.
+ */
++(KiiServerCodeEntry*)serverCodeEntry:(NSString*) entryName version:(NSString*) version environment:(KiiServerCodeEnvironmentVersion) environmentVersion;
 /**
 * URL of KiiApps Server.
 * @return A NSString object representing the URL of KiiApps Server.
