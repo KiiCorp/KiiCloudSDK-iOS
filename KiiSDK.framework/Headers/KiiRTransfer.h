@@ -41,7 +41,7 @@ typedef void(^KiiRTransferBlock)(id<KiiRTransfer> _Nonnull transferObject, NSErr
         NSLog(@"Transfer is completed.");
     }
 
- @param KiiRTransferBlock progress block, can be nil.
+ @param progress KiiRTransferBlock block, can be nil.
  @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
  @return YES if succeeded, NO otherwise.
  @warning This API access to server. Should not be executed in UI/Main thread.
@@ -63,8 +63,8 @@ typedef void(^KiiRTransferBlock)(id<KiiRTransfer> _Nonnull transferObject, NSErr
         }
     }];
 
- @param KiiRTransferBlock progress block. This can be nil.
- @param KiiRTransferBlock completion block to handle after process completed. This can be nil.
+ @param progress KiiRTransferBlock block. This can be nil.
+ @param completion KiiRTransferBlock block to handle after process completed. This can be nil.
  */
 -(void) transferWithProgressBlock:(nullable KiiRTransferBlock) progress andCompletionBlock:(nullable KiiRTransferBlock) completion;
 
