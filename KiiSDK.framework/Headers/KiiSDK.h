@@ -63,6 +63,8 @@ FOUNDATION_EXPORT const unsigned char KiiSDKVersionString[];
 #import <KiiSDK/KiiIdentityDataBuilder.h>
 #import <KiiSDK/KiiSocialAccountInfo.h>
 #import <KiiSDK/KiiThing.h>
+#import <KiiSDK/KiiThingQuery.h>
+#import <KiiSDK/KiiThingQueryResult.h>
 #import <KiiSDK/KiiThingOwner.h>
 #import <KiiSDK/KiiThingFields.h>
 #import <KiiSDK/KiiBaseObject.h>
@@ -74,3 +76,4 @@ FOUNDATION_EXPORT const unsigned char KiiSDKVersionString[];
 #import <KiiSDK/LocaleContainer.h>
 #import <KiiSDK/KAConstants.h>
 #import <KiiSDK/KiiCallback.h>
+#import <KiiSDK/KiiReceivedMessage.h>

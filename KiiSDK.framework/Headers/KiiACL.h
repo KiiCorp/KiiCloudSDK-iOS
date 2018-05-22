@@ -115,7 +115,8 @@ NS_ASSUME_NONNULL_BEGIN
                  didFail:(NSArray*_Nullable*_Nullable)failed
                         error:(NSError*_Nullable*_Nullable)error;
 
-/** Deprecated. Use saveSynchronous:didFail:error: */
+/** @deprecated This method is deprecated.  Use <[KiiACL saveSynchronous:didFail:error:]>
+ */
 - (BOOL) saveSynchronous:(NSError*_Nullable*_Nullable)error
               didSucceed:(NSArray*_Nullable*_Nullable)succeeded
                  didFail:(NSArray*_Nullable*_Nullable)failed __attribute__((deprecated("Use saveSynchronous:didFail:error:")));

@@ -53,7 +53,6 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param experimentID experiment id.
  @param completion The block to be called upon method completion. See example.
- @return an instant of KiiExperiment.
  @exception NSInvalidArgumentException Thrown if given experiment id is <br>
   - Nil or empty <br>
   - Does not match with the pattern [a-zA-Z0-9\-\_\.]\{2,100\}" <br>

@@ -28,11 +28,11 @@ typedef NS_ENUM(NSUInteger, KiiACLAction) {
     /** Action of read file in the bucket.
     * @deprecated This enum is deprecated. Use KiiACLObjectActionRead instead.
     */
-    KiiACLFileActionRead,
+    KiiACLFileActionRead __attribute__ ((deprecated("Use KiiACLObjectActionRead instead."))),
     /** Action of modify, delete file in the bucket.
     * @deprecated This enum is deprecated. Use KiiACLObjectActionWrite instead.
     */
-    KiiACLFileActionWrite,
+    KiiACLFileActionWrite __attribute__ ((deprecated("Use KiiACLObjectActionWrite instead."))),
     /** Action of read object in the bucket. */
     KiiACLObjectActionRead,
     /** Action of modify, delete object in the bucket. */
@@ -69,7 +69,7 @@ typedef NS_ENUM(NSUInteger, KiiACLAction) {
 /** Create a KiiACLEntry object with a <subject> and <action>
  
  The entry will not be applied on the server until the <KiiACL> object is explicitly saved. This method simply returns a working KiiACLEntry with a specified <subject> and <action>.
- @param subject A <KiiUser>, <KiiGroup>, <KiiAnyAuthenticatedUser> or <KiiAnonymousUser> object to which the action/grant is being applied.
+ @param subject A <KiiUser>, <KiiGroup>, <KiiThing>, <KiiAnyAuthenticatedUser> or <KiiAnonymousUser> object to which the action/grant is being applied.
  @param action One of the specified KiiACLAction values the permissions is being applied to.
  @return A KiiACLEntry object with the specified attributes. nil if the subject is not an accepted type.
  */
