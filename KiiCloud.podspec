@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
                    A Cloud Storage SDK of KiiCloud for iOS
                    DESC
   s.homepage     = 'http://www.kii.com'  
-  s.documentation_url = 'http://documentation.kii.com/references/ios/storage/latest/'
+  s.documentation_url = 'http://documentation.kii.com'
   s.author             = { "KiiCorp" => "npm-admin@kii.com" }
   s.platform     = :ios
   s.license      = { :type => 'Kii', :file => 'LICENSE.md' }
