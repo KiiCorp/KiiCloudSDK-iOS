@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KiiServerCodeEntry.h"
 /** Result of KiiServerCodeEntry execution.
  This class can not be instantiated.
  Calling [[KiiServerCodeExecResult alloc] init] directly will throw NSInternalInconsistencyException.
@@ -21,4 +22,10 @@
  @return NSDictionary instance of result data.
  */
 -(nullable NSDictionary*) returnedValue;
+
+/**
+ * Get the version of Node.js to run.
+ * @return environmentVersion
+ */
+-(KiiServerCodeEnvironmentVersion) environmentVersion;
 @end
