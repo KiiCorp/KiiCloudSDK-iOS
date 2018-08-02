@@ -702,7 +702,8 @@ NS_ASSUME_NONNULL_BEGIN
                        newPassword:(NSString*)newPassword
                              error:(NSError*_Nullable*_Nullable)error;
 
-/** Deprecated. Use updatePasswordSynchronous:newPassword:error: instead.*/
+/** @deprecated Use <[KiiUser updatePasswordSynchronous:newPassword:error:]> instead.
+ */
 - (BOOL) updatePasswordSynchronous:(NSError*_Nullable*_Nullable)error
                               from:(NSString*)fromPassword
                                 to:(NSString*)toPassword __attribute__((deprecated("Use updatePasswordSynchronous:newPassword:error: instead.")));
@@ -760,7 +761,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL) resetPasswordSynchronous:(NSString*)userIdentifier
                             error:(NSError*_Nullable*_Nullable)error;
 
-/** Deprecated. Use resetPasswordSynchronous:error instead.*/
+/** @deprecated Use <[KiiUser resetPasswordSynchronous:error:]> instead.*/
 + (BOOL) resetPasswordSynchronous:(NSError*_Nullable*_Nullable)error
                withUserIdentifier:(NSString*)userIdentifier __attribute__((deprecated("Use resetPasswordSynchronous:error:")));
 
@@ -886,7 +887,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL) verifyPhoneNumberSynchronous:(NSString*)code
                                         error:(NSError*_Nullable*_Nullable)error;
-/** Deprecated. Use verifyPhoneNumberSynchronous:error: */
+/** @deprecated Use <[KiiUser verifyPhoneNumberSynchronous:error:]> */
 - (BOOL) verifyPhoneNumber:(NSError*_Nullable*_Nullable)error
                   withCode:(NSString*)code __attribute__((deprecated("Use verifyPhoneNumberSynchronous:error:")));
 

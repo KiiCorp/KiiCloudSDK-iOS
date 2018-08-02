@@ -44,8 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 
  This is introduced for internal use.
  
- @param Dictinary represents query. Should be equibalent to JSON object constructed for query REST api.
- @return KiiQuery instatnce
+ @param queryDict Dictionary represents query. Should be equivalent to JSON object constructed for query REST api.
+ @return KiiQuery instance
  
  */
 + (KiiQuery*) queryWithDictionary:(nullable NSDictionary *)queryDict;

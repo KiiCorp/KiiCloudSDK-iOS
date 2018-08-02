@@ -161,7 +161,7 @@ NS_ASSUME_NONNULL_BEGIN
  KiiObject, you can not assign ID in the client side.  After
  instantiation, call <[KiiThing refresh:]> to fetch the properties.
 
- @param id Thing ID. You must not set vendor thing ID instead of thing ID.
+ @param thingID Thing ID. You must not set vendor thing ID instead of thing ID.
  @return instance of KiiThing or nil.
 */
 + (instancetype)thingWithID:(NSString*) thingID;
@@ -438,7 +438,7 @@ NS_ASSUME_NONNULL_BEGIN
                             error:(NSError*_Nullable*_Nullable) error;
 
 /** Asynchronous version of <[KiiThing
- registerOwnerSynchronous:withThingID:error:]>.
+ registerOwnerSynchronous:thingID:error:]>.
 
  - An error (error code: <[KiiError codeThingNotFound]>) will be
    returned if the thing is not found or already deleted.
@@ -494,7 +494,7 @@ NS_ASSUME_NONNULL_BEGIN
                             error:(NSError*_Nullable*_Nullable) error;
 
 /** Asynchronous version of <[KiiThing
- registerOwnerSynchronous:withVendorThingID:error:]>.
+ registerOwnerSynchronous:vendorThingID:error:]>.
 
  - An error (error code: <[KiiError codeThingNotFound]>) will be
    returned if the thing is not found or already deleted.
@@ -675,7 +675,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL) updateSynchronous:(NSError*_Nullable*_Nullable)error;
 
 /** Asynchronously deletes the Thing from the server.
- @deprecated use deleteWithBlock: instead.
+ @deprecated use <[KiiThing deleteWithBlock:]> instead.
  */
 - (void) delete:(nullable KiiThingBlock)block __attribute__((deprecated("use deleteWithBlock instead.")));
 

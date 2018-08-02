@@ -31,6 +31,7 @@ typedef void(^KiiRTransferManagerBlock)(id <KiiRTransferManaging> _Nullable *_No
  on calling <[KiiRTransfer transferWithProgressBlock:andError:]> and deleted
  on completion/termination of upload.
  
+ @param user KiiUser who execute the upload.
  @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
  @return NSArray Upload entries array.
  */
@@ -46,6 +47,7 @@ typedef void(^KiiRTransferManagerBlock)(id <KiiRTransferManaging> _Nullable *_No
  on calling <[KiiRTransfer transferWithProgressBlock:andError:]> and deleted
  on completion/termination of download.
  
+ @param user KiiUser who execute the download.
  @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
  @return NSArray download entries array that status is ONGOING and SUSPENDED.
  */

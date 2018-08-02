@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "KiiCloud"
-  s.version= "2.6.3"
+  s.version= "2.6.4"
   s.summary      = "A Cloud Storage SDK of KiiCloud."
   s.description  = <<-DESC
                    A Cloud Storage SDK of KiiCloud for iOS
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.author             = { "KiiCorp" => "npm-admin@kii.com" }
   s.platform     = :ios
   s.license      = { :type => 'Kii', :file => 'LICENSE.md' }
-  s.source = { :git => 'https://github.com/KiiCorp/KiiCloudSDK-iOS.git', :tag => 'v2.6.3'  }
+  s.source = { :git => 'https://github.com/KiiCorp/KiiCloudSDK-iOS.git', :tag => 'v2.6.4'  }
   s.source_files  = 'KiiSDK.framework/**/*.h'
   s.public_header_files = 'KiiSDK.framework/**/*.h'
   s.preserve_paths = "KiiSDK.framework"

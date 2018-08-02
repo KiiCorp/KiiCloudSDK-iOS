@@ -69,7 +69,7 @@ typedef NS_ENUM(NSUInteger, KiiACLAction) {
 /** Create a KiiACLEntry object with a <subject> and <action>
  
  The entry will not be applied on the server until the <KiiACL> object is explicitly saved. This method simply returns a working KiiACLEntry with a specified <subject> and <action>.
- @param subject A <KiiUser>, <KiiGroup>, <KiiAnyAuthenticatedUser> or <KiiAnonymousUser> object to which the action/grant is being applied.
+ @param subject A <KiiUser>, <KiiGroup>, <KiiThing>, <KiiAnyAuthenticatedUser> or <KiiAnonymousUser> object to which the action/grant is being applied.
  @param action One of the specified KiiACLAction values the permissions is being applied to.
  @return A KiiACLEntry object with the specified attributes. nil if the subject is not an accepted type.
  */

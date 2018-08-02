@@ -74,3 +74,4 @@ FOUNDATION_EXPORT const unsigned char KiiSDKVersionString[];
 #import <KiiSDK/LocaleContainer.h>
 #import <KiiSDK/KAConstants.h>
 #import <KiiSDK/KiiCallback.h>
+#import <KiiSDK/KiiReceivedMessage.h>
