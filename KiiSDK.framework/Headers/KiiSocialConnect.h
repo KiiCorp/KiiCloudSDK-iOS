@@ -58,8 +58,10 @@ typedef NS_ENUM(NSUInteger, KiiConnectorProvider) {
      * It is configurable only with Kii Cloud Enterprise subscription.
      */
     kiiConnectorOpenIDConnectSimple NS_SWIFT_NAME(OpenIDConnectSimple),
+    /** Reserved for internal use. */
+    kiiReserved1 NS_SWIFT_NAME(Reserved1),
     /** Use Kii to authenticate. */
-    kiiConnectorKii NS_SWIFT_NAME(Kii)
+    kiiConnectorKii NS_SWIFT_NAME(Kii),
 };
 
 

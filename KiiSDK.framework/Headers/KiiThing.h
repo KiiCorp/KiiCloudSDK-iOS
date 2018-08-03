@@ -206,7 +206,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  - An error (error code: <[KiiError codeThingNotFound]>) will be returned if the thing is not found or already deleted.
  
- @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
  @return YES if succeeded, NO otherwise.
  */
 - (BOOL) enableSynchronous:(NSError*_Nullable*_Nullable) error;
@@ -237,7 +237,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  After succeeded, access token published for thing is disabled. In a result, only the app administrator and owners of thing can access the thing. Used when user lost the thing and avoid using by unknown users. It doesn't throw error when the thing is already disabled.
  
- @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
  @return YES if succeeded, NO otherwise.
  */
 - (BOOL) disableSynchronous:(NSError*_Nullable*_Nullable) error;
@@ -274,7 +274,7 @@ NS_ASSUME_NONNULL_BEGIN
  - An error (error code: <[KiiError codeThingNotFound]>) will be returned if the thing is not found or already deleted.
  
  @param vendorThingID identifier given by thing vendor.
- @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
  @return an instance of registered thing.
  @exception NSInvalidArgumentException Thrown if vendorThingID is nil or empty string.
  */
@@ -313,7 +313,7 @@ NS_ASSUME_NONNULL_BEGIN
  - An error (error code: <[KiiError codeThingNotFound]>) will be returned if the thing is not found or already deleted.
  
  @param thingID identifier given by Kii Cloud.
- @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
  @return an instance of registered thing.
  @exception NSInvalidArgumentException Thrown if thingID is nil or empty string.
  */
@@ -361,13 +361,14 @@ NS_ASSUME_NONNULL_BEGIN
  - An error (error code: <[KiiError codeThingOwnershipNotFound]>) will be returned if the passed thing owner (user/group) is not the owner.
  
  @param owner user or group that own the Thing.
- @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
  @return YES if succeeded, NO otherwise.
  @exception NSInvalidArgumentException Thrown if owner is nil or not an instance of KiiUser or KiiGroup.
  */
 - (BOOL) unregisterOwnerSynchronous:(id<KiiThingOwner> ) owner
                          error:(NSError*_Nullable*_Nullable) error;
 
+#pragma mark - deprecated
 /** Asynchronously register owner of the thing in Kii Cloud.
  This method is non-blocking version of <registerOwnerSynchronous:error:>
  
@@ -389,9 +390,10 @@ NS_ASSUME_NONNULL_BEGIN
  @param owner user or group that own the Thing.
  @param block The block to be called upon method completion. See example.
  @exception NSInvalidArgumentException Thrown if owner is nil or not an instance of KiiUser or KiiGroup.
+ @deprecated This method is deprecated. Use  <[KiiThing registerOwner:thingPassword:block:]>
  */
 - (void) registerOwner:(id<KiiThingOwner> ) owner
-                 block:(KiiThingBlock) block;
+                 block:(KiiThingBlock) block __attribute__((deprecated("Use  <[KiiThing registerOwner:thingPassword:block:]>")));
 
 
 /** Synchronously register owner of the thing in Kii Cloud.
@@ -408,12 +410,13 @@ NS_ASSUME_NONNULL_BEGIN
   After the registration, owner can access the thing, buckets, objects in bucket, and topics belongs to the thing.
  
  @param owner user or group that own the Thing.
- @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
  @exception NSInvalidArgumentException Thrown if owner is nil or not an instance of KiiUser or KiiGroup.
  @return YES if succeeded, NO otherwise.
+ @deprecated This method is deprecated. Use  <[KiiThing registerOwnerSynchronous:thingPassword:error:]>
  */
 - (BOOL) registerOwnerSynchronous:(id<KiiThingOwner> ) owner
-                         error:(NSError*_Nullable*_Nullable) error;
+                         error:(NSError*_Nullable*_Nullable) error __attribute__((deprecated("Use  <[KiiThing registerOwnerSynchronous:thingPassword:error:]>")));
 
 /** Register owner of specified thing. This is a blocking method.
 
@@ -434,13 +437,14 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param owner to be registered as owner
  @param thingID ID of the KiiThing to instantiate.
- @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
  @exception NSInvalidArgumentException Thrown if owner is nil or not
  an instance of KiiUser or KiiGroup.
+ @deprecated This method is deprecated. Use  <[KiiThing registerOwnerSynchronous:thingID:thingPassword:error:]>
  */
 + (BOOL) registerOwnerSynchronous:(id<KiiThingOwner> ) owner
                           thingID:(NSString*) thingID
-                            error:(NSError*_Nullable*_Nullable) error;
+                            error:(NSError*_Nullable*_Nullable) error __attribute__((deprecated("Use  <[KiiThing registerOwnerSynchronous:thingID:thingPassword:error:]>")));
 
 /** Asynchronous version of <[KiiThing
  registerOwnerSynchronous:thingID:error:]>.
@@ -466,10 +470,11 @@ NS_ASSUME_NONNULL_BEGIN
  @param block The block to be called upon method completion. See example.
  @exception NSInvalidArgumentException Thrown if owner is nil or not
  an instance of KiiUser or KiiGroup.
+ @deprecated This method is deprecated. Use  <[KiiThing registerOwner:thingID:thingPassword:block:]>
  */
 + (void) registerOwner:(id<KiiThingOwner> ) owner
                thingID:(NSString*) thingID
-                 block:(KiiThingOwnerBlock) block;
+                 block:(KiiThingOwnerBlock) block __attribute__((deprecated("Use  <[KiiThing registerOwner:thingID:thingPassword:block:]>")));
 
 /** Register owner of specified thing. This is a blocking method.
 
@@ -490,13 +495,14 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param owner to be registered as owner
  @param vendorThingID identifier given by thing vendor.
- @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
  @exception NSInvalidArgumentException Thrown if owner is nil or not
  an instance of KiiUser or KiiGroup.
+ @deprecated This method is deprecated. Use  <[KiiThing registerOwnerSynchronous:vendorThingID:thingPassword:error:]>
  */
 + (BOOL) registerOwnerSynchronous:(id<KiiThingOwner>) owner
                     vendorThingID:(NSString*) vendorThingID
-                            error:(NSError*_Nullable*_Nullable) error;
+                            error:(NSError*_Nullable*_Nullable) error __attribute__((deprecated("Use  <[KiiThing registerOwnerSynchronous:vendorThingID:thingPassword:error:]>")));
 
 /** Asynchronous version of <[KiiThing
  registerOwnerSynchronous:vendorThingID:error:]>.
@@ -522,16 +528,191 @@ NS_ASSUME_NONNULL_BEGIN
  @param block The block to be called upon method completion. See example.
  @exception NSInvalidArgumentException Thrown if owner is nil or not
  an instance of KiiUser or KiiGroup.
+ @deprecated This method is deprecated. Use  <[KiiThing registerOwner:vendorThingID:thingPassword:error:]>
  */
 + (void) registerOwner:(id<KiiThingOwner> ) owner
          vendorThingID:(NSString*) vendorThingID
+                 block:(KiiThingOwnerBlock) block __attribute__((deprecated("Use  <[KiiThing registerOwner:vendorThingID:thingPassword:error:]>")));
+
+#pragma mark -
+
+/** Asynchronously register owner of the thing in Kii Cloud.
+ This method is non-blocking version of <registerOwnerSynchronous:thingPassword:error:>
+
+ - An error (error code: <[KiiError codeThingNotFound]>) will be returned if the thing is not found or already deleted.
+
+ - An error (error code: <[KiiError codeThingOwnerNotFound]>) will be returned if the passed thing owner (user/group) is not found or already deleted.
+
+ - An error (error code: <[KiiError codeThingOwnershipExist]>) will be returned if the passed thing owner (user/group) is already the owner.
+
+ After the registration, owner can access the thing, buckets, objects in bucket, and topics belongs to the thing.
+
+ [aThing registerOwner: owner thingPassword: thingPassword
+ block:^(KiiThing *thing, NSError *error) {
+ if(error == nil) {
+ NSLog(@"Thing owner registered: %@", thing);
+ }
+ }];
+
+ @param owner user or group that own the Thing.
+ @param thingPassword Password of the target thing.
+ @param block The block to be called upon method completion. See example.
+ @exception NSInvalidArgumentException Thrown if owner is nil or not an instance of KiiUser or KiiGroup.
+ */
+- (void) registerOwner:(id<KiiThingOwner>) owner
+         thingPassword:(NSString*) thingPassword
+                 block:(KiiThingBlock) block;
+
+
+/** Synchronously register owner of the thing in Kii Cloud.
+ This is a blocking method.
+ <br>This API is authorized by owner of thing.
+ <br>Need user login before execute this API.
+
+ - An error (error code: <[KiiError codeThingNotFound]>) will be returned if the thing is not found or already deleted.
+
+ - An error (error code: <[KiiError codeThingOwnerNotFound]>) will be returned if the passed thing owner (user/group) is not found or already deleted.
+
+ - An error (error code: <[KiiError codeThingOwnershipExist]>) will be returned if the passed thing owner (user/group) is already the owner.
+
+ After the registration, owner can access the thing, buckets, objects in bucket, and topics belongs to the thing.
+
+ @param owner user or group that own the Thing.
+ @param thingPassword Password of the target thing.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
+ @exception NSInvalidArgumentException Thrown if owner is nil or not an instance of KiiUser or KiiGroup.
+ @return YES if succeeded, NO otherwise.
+ */
+- (BOOL) registerOwnerSynchronous:(id<KiiThingOwner> ) owner
+                    thingPassword:(NSString*) thingPassword
+                            error:(NSError*_Nullable*_Nullable) error;
+
+/** Register owner of specified thing. This is a blocking method.
+
+ After the registration, owner can access the thing, buckets, objects
+ in bucket, and topics belongs to the thing.
+
+ This api is authorized by owner of the Thing.
+
+ Need user login before execute this API.
+
+ **NOTE: This api access to server. Should not be executed in UI/Main thread.**
+
+ - An error (error code: <[KiiError codeThingNotFound]>) will be
+ returned if the thing is not found or already deleted.
+ - An error (error code: <[KiiError codeThingOwnershipExist]>) will be
+ returned if the passed thing owner (user/group) is already the
+ owner.
+
+ @param owner to be registered as owner
+ @param thingID ID of the KiiThing to instantiate.
+ @param thingPassword Password of the target thing.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
+ @exception NSInvalidArgumentException Thrown if owner is nil or not
+ an instance of KiiUser or KiiGroup.
+ */
++ (BOOL) registerOwnerSynchronous:(id<KiiThingOwner> ) owner
+                          thingID:(NSString*) thingID
+                    thingPassword:(NSString*) thingPassword
+                            error:(NSError*_Nullable*_Nullable) error;
+
+/** Asynchronous version of <[KiiThing
+ registerOwnerSynchronous:thingID:thingPassword:error:]>.
+
+ - An error (error code: <[KiiError codeThingNotFound]>) will be
+ returned if the thing is not found or already deleted.
+ - An error (error code: <[KiiError codeThingOwnershipExist]>) will be
+ returned if the passed thing owner (user/group) is already the
+ owner.
+
+ Successful operation will return an instance in a block parameter.
+
+ [KiiThing registerOwner:owner
+ thingID:@"YourThingID" thingPassword: thingPassword
+ block:^(KiiThingOwner *owner, NSError *error) {
+ if(error == nil) {
+ NSLog(@"Thing owner registered: %@", owner);
+ }
+ }];
+
+ @param owner to be registered as owner
+ @param thingID ID of the KiiThing to instantiate.
+ @param thingPassword Password of the target thing.
+ @param block The block to be called upon method completion. See example.
+ @exception NSInvalidArgumentException Thrown if owner is nil or not
+ an instance of KiiUser or KiiGroup.
+ */
++ (void) registerOwner:(id<KiiThingOwner> ) owner
+               thingID:(NSString*) thingID
+         thingPassword:(NSString*) thingPassword
                  block:(KiiThingOwnerBlock) block;
+
+/** Register owner of specified thing. This is a blocking method.
+
+ After the registration, owner can access the thing, buckets, objects
+ in bucket, and topics belongs to the thing.
+
+ This api is authorized by owner of the Thing.
+
+ Need user login before execute this API.
+
+ **NOTE: This api access to server. Should not be executed in UI/Main thread.**
+
+ - An error (error code: <[KiiError codeThingNotFound]>) will be
+ returned if the thing is not found or already deleted.
+ - An error (error code: <[KiiError codeThingOwnershipExist]>) will be
+ returned if the passed thing owner (user/group) is already the
+ owner.
+
+ @param owner to be registered as owner
+ @param vendorThingID identifier given by thing vendor.
+ @param thingPassword Password of the target thing.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
+ @exception NSInvalidArgumentException Thrown if owner is nil or not
+ an instance of KiiUser or KiiGroup.
+ */
++ (BOOL) registerOwnerSynchronous:(id<KiiThingOwner>) owner
+                    vendorThingID:(NSString*) vendorThingID
+                    thingPassword:(NSString*) thingPassword
+                            error:(NSError*_Nullable*_Nullable) error;
+
+/** Asynchronous version of <[KiiThing
+ registerOwnerSynchronous:vendorThingID:thingPassword:error:]>.
+
+ - An error (error code: <[KiiError codeThingNotFound]>) will be
+ returned if the thing is not found or already deleted.
+ - An error (error code: <[KiiError codeThingOwnershipExist]>) will be
+ returned if the passed thing owner (user/group) is already the
+ owner.
+
+ Successful operation will return an instance in a block parameter.
+
+ [KiiThing registerOwner:owner
+ vendorThingID:@"YourVendorhingID" thingPassword: thingPassword
+ block:^(KiiThingOwner *owner, NSError *error) {
+ if(error == nil) {
+ NSLog(@"Thing owner registered: %@", owner);
+ }
+ }];
+
+ @param owner to be registered as owner
+ @param vendorThingID identifier given by thing vendor.
+ @param thingPassword Password of the target thing.
+ @param block The block to be called upon method completion. See example.
+ @exception NSInvalidArgumentException Thrown if owner is nil or not
+ an instance of KiiUser or KiiGroup.
+ */
++ (void) registerOwner:(id<KiiThingOwner> ) owner
+         vendorThingID:(NSString*) vendorThingID
+         thingPassword:(NSString*) thingPassword
+                 block:(KiiThingOwnerBlock) block;
+
 
 #pragma mark - register
 /** Asynchronously register thing in Kii Cloud using block.
  This method is non-blocking version of <[KiiThing registerThingSynchronous:password:type:fields:error:]>
- 
- 
+
+
     [KiiThing registerThing: vendorThingID
                    password: password
                        type: thingType
@@ -564,7 +745,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param password for Thing. This is required.
  @param thingType the thing device type. This is optional.
  @param thingFields a <ThingFields> object.
- @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
  @return an instance of registered <KiiThing>.
  @exception NSInvalidArgumentException Thrown if vendorThingID is nil or empty string.
  @exception NSInvalidArgumentException Thrown if password is nil or empty string.
@@ -586,7 +767,7 @@ NS_ASSUME_NONNULL_BEGIN
  - An error (error code: <[KiiError codeThingOwnerNotFound]>) will be returned if the passed thing owner (user/group) is not found or already deleted.
  
  @param thingOwner user or group to be checked.
- @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
  @return YES if passed parameter is the owner of thing, NO otherwise.
  @exception NSInvalidArgumentException Thrown if owner is nil or not an instance of KiiUser or KiiGroup.
  */
@@ -642,7 +823,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  The Thing must exist on the server. Local data will be overwritten. This is a blocking method.
  
- @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
  @return YES if succeeded, NO otherwise.
  */
 - (BOOL) refreshSynchronous:(NSError*_Nullable*_Nullable)error;
@@ -674,7 +855,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  The Thing must exist in order to make this method call. If the Thing does exist, the application-specific fields that have changed will be updated accordingly. This is a blocking method.
 
- @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
  @return YES if succeeded, NO otherwise.
  */
 - (BOOL) updateSynchronous:(NSError*_Nullable*_Nullable)error;
@@ -714,7 +895,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  It will delete bucket, topic which belongs to this thing, entity belongs to the bucket/topic and all ownership information of thing. This operation can not be reverted. Please carefully use this.
  
- @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
  @return YES if succeeded, NO otherwise.
  */
 - (BOOL) deleteSynchronous:(NSError*_Nullable*_Nullable)error;
@@ -752,13 +933,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (KiiPushSubscription* ) pushSubscription;
 
 /**Returns the topics in this Thing scope. This is blocking method.
- @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
  @return  a <KiiListResult> object representing list of topics in this thing scope.
  */
 - (nullable KiiListResult*) listTopicsSynchronous:(NSError*_Nullable*_Nullable) error;
 
 /**Returns the topics in this thing scope. This is blocking method.
- @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
  @param paginationKey pagination key. If nil or empty value is specified, this API regards no paginationKey specified.
  @return  a <KiiListResult> object representing list of topics in this thing scope.
  */
@@ -817,7 +998,7 @@ NS_ASSUME_NONNULL_BEGIN
  To get all the property from cloud, a <refresh:> is necessary.
  This is non blocking operation.
 
- @param error used to return an error by reference (pass NULL if this is not desired). It is recommended to set an actual error object to get the error information.
+ @param error used to return an error by reference (pass nil if this is not desired). It is recommended to set an actual error object to get the error information.
  @return Thing query result.
  */
 + (KiiThingQueryResult *_Nullable) querySynchronous:(KiiThingQuery *) query error:(NSError*_Nullable*_Nullable) error;
