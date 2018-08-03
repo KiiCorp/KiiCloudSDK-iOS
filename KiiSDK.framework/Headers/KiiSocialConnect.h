@@ -125,7 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param key The SDK key assigned by the social network provider. It should not be nil or empty except for Kii Social Network Connect.In case of QQ just pass nil.
  @param secret The SDK secret assigned by the social network provider. In case of Twitter, It should not be nil or empty. In case of QQ and Kii Social Network Connect just pass nil.
  @param options Extra options that can be passed to the SNS, this is not mandatory. Examples could be (Facebook) an NSDictionary of permissions to grant to the authenticated user. In case of qq, twitter and Kii Social Network Connect, options parameter will not be used, please set to nil.
- @exception NSInvalidParameterException will be thrown if key and/or secret is not valid (see description above).
+ @exception NSInvalidArgumentException will be thrown if key and/or secret is not valid (see description above).
  @deprecated Not usable on new social connect login mechanism from v2.2.1.
  */
 + (void) setupNetwork:(KiiSocialNetworkName)network 
@@ -340,7 +340,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param block To be called upon login completion.
  @note This API access to server. Should not be executed in UI/Main thread.
  @exception KiiIllegalStateException will be thrown if setupNetwork: is not called.
- @exception NSInvalidParameterException will be thrown if options is not valid (see description above).
+ @exception NSInvalidArgumentException will be thrown if options is not valid (see description above).
  @deprecated Use <[KiiSocialConnect logIn:options:block:]> .
  */
 + (void) logIn:(KiiSocialNetworkName)network usingOptions:(nullable NSDictionary*)options andBlock: (KiiSocialConnectBlock) block __attribute__((deprecated("Use <[KiiSocialConnect logIn:options:block:]>")));
@@ -450,12 +450,38 @@ NS_ASSUME_NONNULL_BEGIN
  @param provider One of the supported <KiiConnectorProvider> values.
  @param options A dictionary of key/values to pass to KiiSocialConnect. This can be nil if using UI approach.
  @param block To be called upon login completion.
- @exception NSInvalidParameterException will be thrown if options is not valid.
- @exception NSInvalidParameterException will be thrown if block is nil.
- @exception NSInvalidParameterException will be thrown if KiiSocialNetworkName is passed as provider.
+ @exception NSInvalidArgumentException will be thrown if options is not valid.
+ @exception NSInvalidArgumentException will be thrown if block is nil.
+ @exception NSInvalidArgumentException will be thrown if KiiSocialNetworkName is passed as provider.
  @warning Dropbox, Box, Yahoo, LinkedIn, Microsoft Live, Sina Weibo can only use login with UI.
  */
 + (void) logIn:(KiiConnectorProvider)provider options:(nullable NSDictionary*)options block: (KiiSCNBlock) block;
+
+/** Get UINavigationController for login with specified social network.
+
+ This will initiate the login process for the given network, with or without UI handled by SDK. If you prefer to handle login UI or using provider specific SDK to obtain access token, pass required params (acces token, access token secret, open ID) according to each provider. Other than <b> kiiConnectorQQ</b>, Kii SDK can handle the UI by passing nil into the options. If the social network user has already linked with a <KiiUser>,
+ that user will be used as signed user. Otherwise, KiiCloud creates a new user and link with the specified social network account.
+ The provider should be valid <KiiConnectorProvider> values. Otherwise, an exception will be raised. <br>
+ Snippet for Login with social network without UI:<br>
+
+ UINavigationController* nc = [KiiSocialConnect logInNavigationController:kiiConnectorFacebook
+                                                                    block:^(KiiUser *user, KiiConnectorProvider provider, NSError *error) {
+     if (error == nil) {
+         // link successful. Do someting with the user.
+     } else {
+         // something went wrong.
+     }
+ }];
+ [{instance of top view controoler} presentViewController:nc animated:YES completion:nil];
+
+ @param provider One of the supported <KiiConnectorProvider> values.
+ @param block To be called upon login completion.
+ @exception NSInvalidArgumentException will be thrown if block is nil.
+ @exception NSInvalidArgumentException will be thrown if KiiSocialNetworkName is passed as provider.
+ @warning Dropbox, Box, Yahoo, LinkedIn, Microsoft Live, Sina Weibo can only use login with UI.
+ @return navigation controller for login, no return nil. Please present this controller yourself.
+ */
++ (UINavigationController*) logInNavigationController:(KiiConnectorProvider)provider block:(KiiSCNBlock) block;
 
 /** Link the currently logged in user with a social network
  
@@ -596,7 +622,7 @@ NS_ASSUME_NONNULL_BEGIN
          }
      }
  @exception KiiIllegalStateException will be thrown if setupNetwork: is not called.
- @exception NSInvalidParameterException will be thrown if options is not valid (see description above) or if kiiSCNConnector network name is passed.
+ @exception NSInvalidArgumentException will be thrown if options is not valid (see description above) or if kiiSCNConnector network name is passed.
  @deprecated Use <[KiiSocialConnect linkCurrentUser:options:block:]>
  */
 + (void) linkCurrentUserWithNetwork:(KiiSocialNetworkName)network
@@ -626,7 +652,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param block To be called upon link completion.
  @note This API access to server. Should not be executed in UI/Main thread.
  @exception KiiIllegalStateException will be thrown if setupNetwork: is not called.
- @exception NSInvalidParameterException will be thrown if options is not valid (see description above) or if kiiSCNConnector network name is passed.
+ @exception NSInvalidArgumentException will be thrown if options is not valid (see description above) or if kiiSCNConnector network name is passed.
  @deprecated Use <[KiiSocialConnect linkCurrentUser:options:block:]>
  */
 + (void) linkCurrentUserWithNetwork:(KiiSocialNetworkName)network
@@ -724,9 +750,9 @@ NS_ASSUME_NONNULL_BEGIN
  @param provider One of the supported <KiiConnectorProvider> values.
  @param options A dictionary of key/values to pass to KiiSocialConnect. This is mandatory, can not be nil.
  @param block To be called upon link completion. This is mandatory.
- @exception NSInvalidParameterException will be thrown if options is not valid.
- @exception NSInvalidParameterException will be thrown if block is nil.
- @exception NSInvalidParameterException will be thrown if unsupported provider or KiiSocialNetworkName is passed as provider.
+ @exception NSInvalidArgumentException will be thrown if options is not valid.
+ @exception NSInvalidArgumentException will be thrown if block is nil.
+ @exception NSInvalidArgumentException will be thrown if unsupported provider or KiiSocialNetworkName is passed as provider.
  @warning Dropbox, Box, Yahoo, LinkedIn, Microsoft Live, Sina Weibo is not supported, passing it will throw an exception.
  */
 + (void) linkCurrentUser:(KiiConnectorProvider)provider
@@ -753,7 +779,7 @@ NS_ASSUME_NONNULL_BEGIN
          }
      }
  @exception KiiIllegalStateException will be thrown if setupNetwork: is not called.
- @exception NSInvalidParameterException will be thrown if kiiSCNConnector network name is passed.
+ @exception NSInvalidArgumentException will be thrown if kiiSCNConnector network name is passed.
  @deprecated Use <[KiiSocialConnect unLinkCurrentUser:block:]>
  */
 + (void) unLinkCurrentUserWithNetwork:(KiiSocialNetworkName)network
@@ -779,7 +805,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param block To be called upon unlink completion.
  @note This API access to server. Should not be executed in UI/Main thread.
  @exception KiiIllegalStateException will be thrown if setupNetwork: is not called.
- @exception NSInvalidParameterException will be thrown if kiiSCNConnector network name is passed.
+ @exception NSInvalidArgumentException will be thrown if kiiSCNConnector network name is passed.
  @deprecated Use <[KiiSocialConnect unLinkCurrentUser:block:]>
  */
 + (void) unLinkCurrentUserWithNetwork:(KiiSocialNetworkName)network
@@ -802,8 +828,8 @@ NS_ASSUME_NONNULL_BEGIN
  @param provider One of the supported <KiiConnectorProvider> values.
  @param block To be called upon unlink completion. This is mandatory.
  @note This API access to server. Should not be executed in UI/Main thread.
- @exception NSInvalidParameterException will be thrown if block is nil.
- @exception NSInvalidParameterException will be thrown if unsupported provider or KiiSocialNetworkName is passed as provider.
+ @exception NSInvalidArgumentException will be thrown if block is nil.
+ @exception NSInvalidArgumentException will be thrown if unsupported provider or KiiSocialNetworkName is passed as provider.
  @warning Dropbox, Box, Yahoo, LinkedIn, Microsoft Live, Sina Weibo is not supported, passing it will throw an exception.
  */
 + (void) unLinkCurrentUser:(KiiConnectorProvider)provider
@@ -1044,7 +1070,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param provider One of the supported <KiiConnectorProvider> values.
  @return An NSDictionary representing the access token's object.
- @exception NSInvalidParameterException will be thrown if KiiSocialNetworkName is passed as provider.
+ @exception NSInvalidArgumentException will be thrown if KiiSocialNetworkName is passed as provider.
  */
 + (nullable NSDictionary*)accessTokenDictionary:(KiiConnectorProvider)provider;
 NS_ASSUME_NONNULL_END
