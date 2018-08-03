@@ -135,7 +135,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,readonly) NSDictionary* linkedSocialAccounts;
 
 /** Locale of the user. nil if the user registered without locale. */
-@property(nonatomic, nullable)  LocaleContainer *locale;
+@property(nullable)  LocaleContainer *locale;
 
 /** Create a user object to prepare for registration with credentials pre-filled
  Creates an pre-filled user object for manipulation. This user will not be authenticated until one of the authentication methods are called on it. Custom fields can be added to it before it is registered or authenticated.
