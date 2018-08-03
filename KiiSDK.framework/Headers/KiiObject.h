@@ -479,7 +479,6 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param expirationDate defined expiration date.
  @param block completion block. See code snippet above.
- @return the URL for the KiiObject body contents.
  @exception NSInvalidArgumentException will be thrown if completion block is nil.
  */
 - (void) publishBodyExpiresAt:(NSDate*) expirationDate withBlock:(KiiObjectPublishBodyBlock) block;
@@ -681,7 +680,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param sourceFileURL url for source file, it should have 'file://' scheme.
  @param contentType Content type of the object body. Please refer to http://www.iana.org/assignments/media-types/media-types.xhtml for the standard. If nil is passed, it will be set as "application/octet-stream".
  @param completion block for handling completion.
- @param contentType Content type of the object body. Please refer to http://www.iana.org/assignments/media-types/media-types.xhtml for the standard. If nil is passed, it will be parsed from URL's file extension.
  @param progress block for handling progress.
  @note After this operation, KiiObject version on cloud will be updated. If you want to use <saveSynchronous:withError:> or <saveAllFieldsSynchronous:withError:> with overwrite=NO argument, please do <refreshSynchronous:> before saving.
  */

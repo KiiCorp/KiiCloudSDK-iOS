@@ -21,8 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
 /** The file container being queried. nil if querying for objects. */
 @property (readonly,nullable) NSString * sortField;
 
-/** The maximum number of results to return (0 < N <= 100] */
-@property (nonatomic, assign) int limit;
+/** The maximum number of items to be returned
+ This limit behaves in a best effort way.
+ Actual number of the items in the response could be smaller than the limit.
+ (But never exceeds.)
+ If the specified limit is greater than the limit of the server or limit
+ is 0, limit of the server will be applied.
+ */
+@property (nonatomic, assign) unsigned int limit;
 
 /** TRUE if the result set should be sorted in descending order */
 @property (readonly) BOOL sortDescending;

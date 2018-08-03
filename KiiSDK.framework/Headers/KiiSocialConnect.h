@@ -39,7 +39,7 @@ typedef NS_ENUM(NSUInteger, KiiConnectorProvider) {
     /** Use Yahoo to authenticate */
     kiiConnectorYahoo NS_SWIFT_NAME(Yahoo),
     /** Use Google to authenticate @deprecated Please use kiiConnectorGoogleplus instead*/
-    kiiConnectorGoogle NS_SWIFT_NAME(Google),
+    kiiConnectorGoogle NS_SWIFT_NAME(Google) __attribute__ ((deprecated("Please use kiiConnectorGoogleplus instead"))),
     /** Use Dropbox to authenticate */
     kiiConnectorDropbox NS_SWIFT_NAME(Dropbox),
     /** Use Box to authenticate */

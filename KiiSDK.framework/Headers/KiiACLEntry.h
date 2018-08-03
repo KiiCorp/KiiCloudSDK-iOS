@@ -28,11 +28,11 @@ typedef NS_ENUM(NSUInteger, KiiACLAction) {
     /** Action of read file in the bucket.
     * @deprecated This enum is deprecated. Use KiiACLObjectActionRead instead.
     */
-    KiiACLFileActionRead,
+    KiiACLFileActionRead __attribute__ ((deprecated("Use KiiACLObjectActionRead instead."))),
     /** Action of modify, delete file in the bucket.
     * @deprecated This enum is deprecated. Use KiiACLObjectActionWrite instead.
     */
-    KiiACLFileActionWrite,
+    KiiACLFileActionWrite __attribute__ ((deprecated("Use KiiACLObjectActionWrite instead."))),
     /** Action of read object in the bucket. */
     KiiACLObjectActionRead,
     /** Action of modify, delete object in the bucket. */

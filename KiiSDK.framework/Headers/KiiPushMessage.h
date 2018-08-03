@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** Dictionary representation of APNs received message.
  @deprecated Use <KiiReceivedMessage>
 */
-@property(nonatomic,readonly,nullable) NSDictionary* rawMessage;
+@property(nonatomic,readonly,nullable) NSDictionary* rawMessage __attribute__ ((deprecated()));
 
 /** Dictionary representation of JSON Object with only one-level of nesting. Required if no system-specific “data” fields has been provided for all the systems enabled.	Dictionary with the data that will be sent to all the push systems enabled in this request.
  If gcmFields is defined, the data would be validated for GCM reserved payload keys. 
@@ -106,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return A KiiPushMessage instance that is associated to the userInfo.
  @deprecated Use <KiiReceivedMessage>
  */
-+(KiiPushMessage*) messageFromAPNS:(NSDictionary*) userInfo;
++(KiiPushMessage*) messageFromAPNS:(NSDictionary*) userInfo __attribute__ ((deprecated("Use KiiReceivedMessage instead.")));
 
 /** Constructor method that composes a message for explicit push
  @param apnsfields The message data for APNS

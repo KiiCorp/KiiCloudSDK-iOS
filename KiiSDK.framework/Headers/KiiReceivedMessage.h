@@ -134,7 +134,6 @@ NS_ASSUME_NONNULL_BEGIN
 /** Parse incoming APNs message.
  @param userInfo An userInfo instance that received from APNs as a push message.
  @return A KiiPushMessage instance that is associated to the userInfo.
- @deprecated Use <KiiReceivedMessage>
  */
 + (instancetype)messageFromAPNS:(NSDictionary *)userInfo;
 
