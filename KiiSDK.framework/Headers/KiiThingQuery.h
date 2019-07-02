@@ -26,7 +26,7 @@
 /** Creates a query to search things owned by the specified user and groups.
   Both the owner and groupOwners parameter are optional, but at least one of them must be supplied.
   @param owner <KiiUser> object must be current user.
-  @param groupOwners List of groups must be belonged by current user.
+  @param groups List of groups which current user and target things belongs to.
   @exception NSInvalidArgumentException if both (owner and groups) are nil.
   @exception NSInvalidArgumentException if groups contains non <KiiGroup> instance.
   @exception NSInvalidArgumentException if groups contains group that does not have groupID.
