@@ -81,12 +81,12 @@ typedef NS_ENUM(NSUInteger, KiiSite) {
     kiiSiteUS NS_SWIFT_NAME(US),
     /** Use cloud in Japan. */
     kiiSiteJP NS_SWIFT_NAME(JP),
-    /** Use cloud in China. */
-    kiiSiteCN NS_SWIFT_NAME(CN),
+    /** Use cloud in China. @deprecated */
+    kiiSiteCN NS_SWIFT_NAME(CN) __attribute__ ((deprecated("It was deprecated."))),
     /** Use cloud in Singapore. */
     kiiSiteSG NS_SWIFT_NAME(SG),
-    /** Use cloud in cn3 site of China. */
-    kiiSiteCN3 NS_SWIFT_NAME(CN3),
+    /** Use cloud in cn3 site of China. @deprecated It will not be supported after July 31st, 2019 */
+    kiiSiteCN3 NS_SWIFT_NAME(CN3) __attribute__ ((deprecated("It will not be supported after July 31st, 2019"))),
     /** Use cloud in EU */
     kiiSiteEU NS_SWIFT_NAME(EU)
 };
@@ -94,15 +94,15 @@ typedef NS_ENUM(NSUInteger, KiiSite) {
 
 NS_ASSUME_NONNULL_BEGIN
 /** The main SDK class
- 
+
  This class must be initialized on application launch using <beginWithID:andKey:>. This class also allows the application to make some high-level user calls and access some application-wide data at any time using static methods.
  */
 @interface Kii : NSObject
 
 
 /** Initialize the Kii SDK
- 
- Defaults to the US deployment. Should reside in applicationDidFinishLaunching:withResult: 
+
+ Defaults to the US deployment. Should reside in applicationDidFinishLaunching:withResult:
  Meanwhile, Kii Analytics is initialized.
  @param appId The application ID found in your Kii developer console
  @param appKey The application key found in your Kii developer console
@@ -110,7 +110,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void) beginWithID:(NSString*)appId andKey:(NSString*)appKey;
 
 /** Initialize the Kii SDK
- 
+
  Should reside in applicationDidFinishLaunching:withResult:
  If Kii has provided a custom URL, use this initializer to set it.
  Meanwhile, Kii Analytics is initialized.
@@ -125,7 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Set the access token lifetime in seconds.
- 
+
  If you don't call this method or call it with 0, token won't be expired.
  Call this method if you like the access token to be expired after a certain period.
  Once called, token retrieved by each authentication will have the specified lifetime.
@@ -147,14 +147,14 @@ NS_ASSUME_NONNULL_BEGIN
 +(long long) accessTokenExpiration;
 
 /** Get or create a bucket at the application level
- 
+
  @param bucketName The name of the bucket you'd like to use
  @return An instance of a working <KiiBucket>
  */
 + (KiiBucket*) bucketWithName:(NSString*)bucketName;
 
 /** Get or create an encrypted bucket at the application level.
- 
+
  @param bucketName The name of the encrypted bucket you'd like to use.
  @return An instance of a working <KiiEncryptedBucket>
  @exception NSInvalidArgumentException when bucketName is not acceptable format. For details please refer to <[KiiBucket isValidBucketName:(NSString*) bucketName]>.
@@ -164,7 +164,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Get a Topic at the application level
  Creation of App-scope topic is only supported by REST API calls, iOS SDK only has ability to get the app-scope topic object.
- 
+
  @param topicName The name of the topic you'd like to use. It has to match the pattern ^[A-Za-z0-9_-]{1,64}$, that is letters, numbers, '-' and '_' and non-multibyte characters with a length between 1 and 64 characters.
  @return An instance of a working <KiiTopic>
  */
@@ -182,7 +182,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /** Creates a reference to a group with the given name
- 
+
  If the group already exists, it should be be 'refreshed' to fill the data from the server
  @param groupName An application-specific group name
  @return a working <KiiGroup>
@@ -191,7 +191,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /** Creates a reference to a group with the given name with default members
- 
+
  If the group already exists, it should be be 'refreshed' to fill the data from the server
  @param groupName An application-specific group name
  @param members An array of members to automatically add to the group upon creation
