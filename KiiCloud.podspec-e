@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
                    A Cloud Storage SDK of KiiCloud for iOS
                    DESC
-  s.homepage     = 'http://www.kii.com'  
+  s.homepage     = 'https://www.kii.com'
   s.documentation_url = 'http://documentation.kii.com'
   s.author             = { "KiiCorp" => "npm-admin@kii.com" }
   s.platform     = :ios
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.frameworks = "MobileCoreServices", "Accounts", "Social", "Security", "ImageIO"
   s.libraries = "sqlite3"
-  
+
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 
