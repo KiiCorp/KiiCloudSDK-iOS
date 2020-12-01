@@ -146,9 +146,6 @@
  - *905* - Variation with specified name is not found.
  - *906* - Failed to apply variation due to no user logged in.
 
- <h3>PhotoColle Errors (10xx)</h3>
- - *1001* - Unsupported MIME type for PhotoColle transfer.
-
  <h3>Thing Errors (11xx)</h3>
  - *1101* - Specified Thing is not found on the cloud.
  - *1102* - Specified Thing owner's (user/group) is not found on the cloud.
@@ -543,12 +540,6 @@
 /** Failed to apply variation due to no user logged in.
  */
 + (NSInteger) codeFailedToApplyVariationDueToNoUserLoggedIn;
-
-#pragma mark - 1000 codes (PhotoColle errors)
-/* PhotoColle errors (1XXX) */
-
-/* Unsupported MIME type for PhotoColle transfer. */
-+ (NSInteger) codeUnsupportedMIMETypeForPhotoColleTransfer;
 
 #pragma mark - 1100 codes (Thing errors)
 
