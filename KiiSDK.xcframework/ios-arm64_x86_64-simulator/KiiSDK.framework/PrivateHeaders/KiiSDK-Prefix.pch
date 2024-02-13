@@ -1,0 +1,49 @@
+//
+// Prefix header for all source files of the 'KiiSDK' target in the 'KiiSDK' project
+//
+
+#ifdef __OBJC__
+    #import "KiiLogger.h"
+#endif
+
+
+#define KII_LOG_VERBOSE     3
+#define KII_LOG_INFO        2
+#define KII_LOG_WARN        1
+#define KII_LOG_ERROR       0
+#define KII_LOG_DESCRIBE    -1
+
+// the default log level (can be overridden by developer)
+
+#define KII_LOG_MACRO(lvl, fnct, frmt, ...)     \
+  [KiiLogger kiiLogger:lvl                      \
+                  file:__FILE__                 \
+              function:fnct                     \
+                  line:__LINE__                 \
+                format:(frmt), ##__VA_ARGS__]
+
+
+
+// the public log - for release
+#define KiiErrorLog(fmt, ...) KII_LOG_MACRO(KII_LOG_ERROR, NULL, fmt, ##__VA_ARGS__);
+#define KiiInfoLog(fmt, ...) KII_LOG_MACRO(KII_LOG_INFO, __PRETTY_FUNCTION__, fmt, ##__VA_ARGS__);
+#define KiiWarningLog(fmt, ...) KII_LOG_MACRO(KII_LOG_WARN, __PRETTY_FUNCTION__, fmt, ##__VA_ARGS__);
+#define KiiVerboseLog(fmt, ...) KII_LOG_MACRO(KII_LOG_VERBOSE, __PRETTY_FUNCTION__, fmt, ##__VA_ARGS__);
+
+#define KiiDescribeLog(fmt, ...) KII_LOG_MACRO(KII_LOG_DESCRIBE, NULL, fmt, ##__VA_ARGS__);
+
+
+
+#define KII_QUERY_LIMIT         100
+#define KII_DEFAULT_CONTAINER   @"KII_STORAGE"
+
+#define KII_USA         @"https://api.kii.com/api"
+#define KII_JAPAN       @"https://api-jp.kii.com/api"
+#define KII_CHINA       @"https://api-cn2.kii.com/api"
+#define KII_SINGAPORE   @"https://api-sg.kii.com/api"
+#define KII_CHINA_3  @"https://api-cn3.kii.com/api"
+#define KII_EU          @"https://api-eu.kii.com/api"
+#define UA_PRODUCT      @"KiiSDKiOS"
+
+#define KII_BUILD_NUMBER    1
+#define KII_BUILD_VERSION   @"1.1"
